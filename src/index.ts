@@ -1,13 +1,14 @@
-import express from 'express';
-import dotenv from 'dotenv';
+import { startWebServer } from "./app";
+import { startDataBase } from "./services/database/app-data-source";
 
-dotenv.config();
+async function main() {
+    try {
+        await startDataBase();
+        console.log('Conectado ao banco de dados!');
+        await startWebServer();
+    } catch (error) {
+        console.log(error,'Erro ao inicializar app!')
+    }
+}
 
-const app = express();
-
-app.use(express.json());
-app.listen(process.env.PORT, ()=>{
-    console.log("Servidor Express Ativo!");
-});
-
-
+main();
