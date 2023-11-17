@@ -1,7 +1,7 @@
 import {DataSource} from "typeorm";
 import dotenv from "dotenv";
 import { User } from "../../modules/users/entities/user.entity";
-import { Post } from "../../modules/users/entities/posts/entities/post.entity";
+import { Post } from "../../modules/posts/entities/post.entity";
 
 dotenv.config();
 
