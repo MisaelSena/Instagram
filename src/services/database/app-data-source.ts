@@ -2,6 +2,7 @@ import {DataSource} from "typeorm";
 import dotenv from "dotenv";
 import { User } from "../../modules/users/entities/user.entity";
 import { Post } from "../../modules/posts/entities/post.entity";
+import { Like } from "../../modules/likes/entities/like.entity";
 
 dotenv.config();
 
@@ -14,7 +15,7 @@ export const AppDataSource = new DataSource({
     database: process.env.DB_NAME,
     synchronize: true,
     logging: true,
-    entities: [User, Post],    
+    entities: [User, Post, Comment, Like],    
 })
 
 export async function startDataBase() {
