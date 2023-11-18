@@ -23,6 +23,40 @@ class UserController{
         }
     }
 
+    //Read All Users
+    async listUsers(req: Request, res: Response) {
+        try {
+
+          const users = await AppDataSource.getRepository(User).find({
+            select: ["id", "name", "bio", "count_seguidores", "count_seguindo"],
+          });
+
+          return res.status(200).json({ ok: true, users });
+
+        } catch (error) {
+
+          console.log(error, "Erro ao Listar Usuários!");
+          return res.status(400).json({ message: "Erro ao Listar Usuários!" });
+        }
+      }
+    //Read Only one User 
+    async listOnlyOneUser(req: Request, res: Response) {
+        try {
+          const user = await AppDataSource.getRepository(User).findOne({
+            select: ["id", "name", "bio", "count_seguidores", "count_seguindo"],
+            where: { id: +req.params.user_id },
+          });
+
+          if(!user){return res.status(404).send({ ok: false, error: "Usuário não encontrado" });}
+
+          return res.status(200).json({ ok: true, user });
+
+        } catch (error) {
+          console.log(error, "Erro ao listar usuário");
+          res.status(500).send({ ok: false, error: "Erro ao listar usuário" });
+        }
+      }
+    
 }
 
 export default new UserController();
