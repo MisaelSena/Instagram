@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { User } from "../../modules/users/entities/user.entity";
 import { Post } from "../../modules/posts/entities/post.entity";
 import { Like } from "../../modules/likes/entities/like.entity";
+import { Comment } from "../../modules/comments/entities/comment.entity";
 
 dotenv.config();
 
