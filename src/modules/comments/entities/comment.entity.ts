@@ -1,4 +1,6 @@
-import { Entity } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Post } from "../../posts/entities/post.entity";
+import { User } from "../../users/entities/user.entity";
 
 @Entity("comments")
 export class Comment{
@@ -22,6 +24,12 @@ export class Comment{
 
     @DeleteDateColumn()
     deleted_at: Date;
+    
+    @ManyToOne(() => Post, (post) => post.comments)
+    @JoinColumn({ name: "post_id" })
+    post: Post;
 
-    //Falta Incluir os relacionamentos
+    @ManyToOne(() => User, (user) => user.comments)
+    @JoinColumn({ name: "user_id" })
+    user: User;
 }
