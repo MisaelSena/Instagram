@@ -12,6 +12,8 @@ export const UserRoutes = (): Router =>{
     router.get("/:user_id", UserController.listOnlyOneUser);
     //Rota para atualizar user
     router.patch("/:user_id", UserController.updateUser);
+    //Rota para deletar user
+    router.delete("/:user_id", UserController.deleteUser);
 
     return router;
 }

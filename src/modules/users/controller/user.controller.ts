@@ -74,6 +74,22 @@ class UserController{
         res.status(500).send({ ok: false, error: "Erro ao atualizar usuário!" });
       }
     }
+    //Delete User
+    async deleteUser(req: Request, res: Response){
+      try {
+        const user = await AppDataSource.getRepository(User).findOne({where:{id: +req.params.user_id}});
+        
+        if (!user) {return res.status(404).send({ok: false, error: "Usuário não encontrado" })}
+
+        await AppDataSource.getRepository(User).softRemove(user);
+        console.log(`User ${user.id} deleted`);
+
+        return res.status(200).json({ ok: true,message:"Usuário deletado com sucesso!"});
+
+      } catch (error) {
+        res.status(500).send({ ok: false, error: "Erro ao deletar usuário!" });
+      }
+    }
     
 }
 
