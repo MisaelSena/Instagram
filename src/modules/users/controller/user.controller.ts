@@ -56,6 +56,24 @@ class UserController{
           res.status(500).send({ ok: false, error: "Erro ao listar usuário" });
         }
       }
+    //Update user
+    async updateUser(req: Request, res: Response){
+      const {name, bio} = req.body;
+      try {
+        const user = await AppDataSource.getRepository(User).findOne({where:{id: +req.params.user_id}});
+
+        if (!user) {return res.status(404).send({ok: false, error: "Usuário não encontrado" })}
+
+        if (name) {user.name = name}
+        if (bio) {user.bio = bio}
+
+        await AppDataSource.getRepository(User).save(user);
+
+        return res.status(200).json({ ok: true,message:"Usuário atualizado", user })
+      } catch (error) {
+        res.status(500).send({ ok: false, error: "Erro ao atualizar usuário!" });
+      }
+    }
     
 }
 
