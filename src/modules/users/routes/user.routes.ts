@@ -14,6 +14,8 @@ export const UserRoutes = (): Router =>{
     router.patch("/:user_id", UserController.updateUser);
     //Rota para deletar user
     router.delete("/:user_id", UserController.deleteUser);
+    //Rota de login
+    router.post("/login", UserController.login);
 
     return router;
 }
