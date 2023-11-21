@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { UserRoutes } from './modules/users/routes/user.routes';
 import { PostRoutes } from './modules/posts/routes/post.routes';
 import { CommentRouter } from './modules/comments/routes/comment.routes';
+import { LikeRouter } from './modules/likes/routes/like.routes';
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,8 @@ app.use("/users",UserRoutes());
 app.use("/posts",PostRoutes());
 //Rota para ações em comentários
 app.use("/comment",CommentRouter());
+//Like
+app.use("/like",LikeRouter());
 
 export async function startWebServer() {
     return new Promise((resolve)=>{

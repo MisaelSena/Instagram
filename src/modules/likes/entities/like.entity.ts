@@ -14,6 +14,9 @@ export class Like{
     @Column()
     post_id: number;
 
+    @Column()
+    like: boolean;
+
     @CreateDateColumn()
     created_at: Date;
 
