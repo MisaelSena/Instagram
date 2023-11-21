@@ -10,6 +10,8 @@ export const PostRoutes = ():Router =>{
     router.post('/create',validateJwtUser,validateCreatePost,PostController.createPost);
     //Lista Posts do Usuário Logado
     router.get('/myposts',validateJwtUser,PostController.listMyPosts);
+    //Lista Posts de Amigo
+    router.get('/:friend_id',validateJwtUser,PostController.listPostsUserFriend);
 
     return router;
 }
