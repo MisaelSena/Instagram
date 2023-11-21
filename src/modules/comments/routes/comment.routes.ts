@@ -7,6 +7,7 @@ export const CommentRouter = ():Router =>{
     const router = Router();
     //Realização de comentário
     router.post('/create',validateJwtUser,validateComment,CommentController.createComment);
-    
+    //Remoção de comentário
+    router.delete('/remove',validateJwtUser,CommentController.removeComment);
     return router;
 }
