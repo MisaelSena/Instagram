@@ -1,13 +1,15 @@
 import { Router } from "express";
-import { validateCreateUserMiddleware } from "../../users/middlewares/validate-user-creation.middleware";
 import PostController from "../controllers/post.controller";
 import { validateJwtUser } from "../../../commons/middlewares/auth.middleware";
+import { validateCreatePost } from "../middleware/validate-create-post.middleware";
 
 export const PostRoutes = ():Router =>{
     const router = Router();
     
     //Publicação de Post
-    router.post('/create',validateJwtUser,validateCreateUserMiddleware,PostController.createPost);
+    router.post('/create',validateJwtUser,validateCreatePost,PostController.createPost);
+    //Lista Posts do Usuário Logado
+    router.get('/myposts',validateJwtUser,PostController.listMyPosts);
 
     return router;
 }

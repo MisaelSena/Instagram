@@ -23,6 +23,21 @@ class PostController{
             return res.status(500).send({ ok: false, error: "Erro ao publicar Post" });
         }
     }
+    //Listar posts do usuário logado
+    async listMyPosts(req: Request, res: Response){
+        try {
+            const usuarioLogado = res.locals.user as User;
+            const myPosts = await AppDataSource.getRepository(Post).find({where:{user_id:+usuarioLogado.id}})
+
+            if(!myPosts){return res.status(200).json({ok:true, myPosts: "Você não possui posts!"});}
+
+            return res.status(200).json({ok:true, myPosts: myPosts});
+        } catch (error) {
+            console.log(error, "Erro ao Listar Posts do usuário logado");
+            return res.status(500).send({ ok: false, error: "Erro ao Listar Posts do usuário logado" });
+        }
+
+    }
 
 }
 
